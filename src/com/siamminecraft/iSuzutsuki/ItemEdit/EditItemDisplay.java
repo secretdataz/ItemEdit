@@ -53,6 +53,25 @@ public class EditItemDisplay implements CommandExecutor{
 			p.sendMessage(ChatColor.GREEN+"Added item lore");
 			return true;
 		}
+		if(cmd.getName().equalsIgnoreCase("clearlore"))
+		{
+			if(!(cs instanceof Player) || !cs.hasPermission("itemedit.displayedit")){ cs.sendMessage("Error. Not enough permissions"); return true;}
+			Player p = (Player)cs;		
+			ItemStack item = p.getItemInHand();
+			if(item == null){p.sendMessage("Error! Empty hand."); return true;}
+			NamedItemStack nstack = new NamedItemStack(item);
+			p.setItemInHand(nstack.setLore().getItemStack());
+			p.sendMessage(ChatColor.GREEN+"Cleared item lore");
+			return true;
+		}
+		if(cmd.getName().equalsIgnoreCase("displayhand"))
+		{
+			if(!(cs instanceof Player) || !cs.hasPermission("itemedit.displayedit")){ cs.sendMessage("Error. Not enough permissions"); return true;}
+			Player p = (Player)cs;		
+			ItemStack item = p.getItemInHand();
+			if(item == null){p.sendMessage("Error! Empty hand."); return true;}
+			p.sendMessage(item.toString());
+		}
 		return false;
 	}
     public static String replaceColors(String string)

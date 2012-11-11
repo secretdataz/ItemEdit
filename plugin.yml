@@ -8,6 +8,10 @@ commands:
         usage: /itemname <name>
     addlore:
         usage: /addlore <lore>
+    clearlore:
+        usage: /clearlore
+    displayhand:
+        usage: /displayhand (Debug cmd)
 permissions:
     itemedit.unlimited:
         default: op
