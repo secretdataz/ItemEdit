@@ -1,0 +1,9 @@
+name: ItemEdit
+main: com.siamminecraft.iSuzutsuki.ItemEdit.ItemEditPlugin
+version: indev
+commands:
+    itemedit:
+        usage: &4/itemedit set <amount> , /itemedit add <amount>
+permissions:
+    itemedit.unlimited:
+        default: op
