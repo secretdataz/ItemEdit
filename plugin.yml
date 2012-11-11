@@ -3,11 +3,11 @@ main: com.siamminecraft.iSuzutsuki.ItemEdit.ItemEditPlugin
 version: indev
 commands:
     itemedit:
-        usage: &4/itemedit set <amount> , /itemedit add <amount>
+        usage: /itemedit set <amount> , /itemedit add <amount>
     itemname:
-        usage: &4/itemname <name>
+        usage: /itemname <name>
     addlore:
-        usage: &4/addlore <lore>
+        usage: /addlore <lore>
 permissions:
     itemedit.unlimited:
         default: op
