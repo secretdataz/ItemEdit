@@ -11,21 +11,52 @@ import com.siamminecraft.iSuzutsuki.SiamminecraftAPI.Item.NamedItemStack;
 
 public class EditItemDisplay implements CommandExecutor{
 
+	ItemEditPlugin pl;
+	public EditItemDisplay(ItemEditPlugin pl)
+	{
+		this.pl = pl;
+		pl.getCommand("itemname").setExecutor(this);
+	}
 	public boolean onCommand(CommandSender cs,Command cmd,String l,String[] args)
 	{
-		if(args.length<1)return false;
-		if(!(cs instanceof Player) || !cs.hasPermission("itemedit.displayedit")){ cs.sendMessage("Error. Not enough permissions"); return true;}
-		Player p = (Player)cs;		
-		ItemStack item = p.getItemInHand();
-		if(item == null){p.sendMessage("Error! Empty hand."); return true;}
-		NamedItemStack nstack = new NamedItemStack(item);
-		StringBuilder str = new StringBuilder();
-		for(String s : args)
+		if(cmd.getName().equalsIgnoreCase("itemname"))
 		{
-			str.append(s).append(" ");
+			if(args.length<1)return false;
+			if(!(cs instanceof Player) || !cs.hasPermission("itemedit.displayedit")){ cs.sendMessage("Error. Not enough permissions"); return true;}
+			Player p = (Player)cs;		
+			ItemStack item = p.getItemInHand();
+			if(item == null){p.sendMessage("Error! Empty hand."); return true;}
+			NamedItemStack nstack = new NamedItemStack(item);
+			StringBuilder str = new StringBuilder();
+			for(String s : args)
+			{
+				str.append(s).append(" ");
+			}
+			p.setItemInHand(nstack.setName(replaceColors(str.toString())).getItemStack());
+			p.sendMessage(ChatColor.GREEN+"Edited item name");
+			return true;
 		}
-		p.setItemInHand(nstack.setName(str.toString()).getItemStack());
-		p.sendMessage(ChatColor.GREEN+"Edited item name");
-		return true;
+		if(cmd.getName().equalsIgnoreCase("addlore"))
+		{
+			if(args.length<1)return false;
+			if(!(cs instanceof Player) || !cs.hasPermission("itemedit.displayedit")){ cs.sendMessage("Error. Not enough permissions"); return true;}
+			Player p = (Player)cs;		
+			ItemStack item = p.getItemInHand();
+			if(item == null){p.sendMessage("Error! Empty hand."); return true;}
+			NamedItemStack nstack = new NamedItemStack(item);
+			StringBuilder str = new StringBuilder();
+			for(String s : args)
+			{
+				str.append(s).append(" ");
+			}
+			p.setItemInHand(nstack.addLore(replaceColors(str.toString())).getItemStack());
+			p.sendMessage(ChatColor.GREEN+"Added item lore");
+			return true;
+		}
+		return false;
 	}
+    public static String replaceColors(String string)
+    {
+    	return string.replaceAll("(?i)&([a-k0-9])", "\u00A7$1");
+    }
 }

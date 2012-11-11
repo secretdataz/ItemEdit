@@ -4,6 +4,12 @@ version: indev
 commands:
     itemedit:
         usage: &4/itemedit set <amount> , /itemedit add <amount>
+    itemname:
+        usage: &4/itemname <name>
+    addlore:
+        usage: &4/addlore <lore>
 permissions:
     itemedit.unlimited:
+        default: op
+    itemedit.displayedit:
         default: op
