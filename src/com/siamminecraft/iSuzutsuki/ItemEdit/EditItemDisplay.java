@@ -16,9 +16,14 @@ public class EditItemDisplay implements CommandExecutor{
 	{
 		this.pl = pl;
 		pl.getCommand("itemname").setExecutor(this);
+		pl.getCommand("addlore").setExecutor(this);
+		pl.getCommand("clearlore").setExecutor(this);
+		pl.getCommand("displayhand").setExecutor(this);
 	}
 	public boolean onCommand(CommandSender cs,Command cmd,String l,String[] args)
 	{
+		try
+		{
 		if(cmd.getName().equalsIgnoreCase("itemname"))
 		{
 			if(args.length<1)return false;
@@ -38,7 +43,6 @@ public class EditItemDisplay implements CommandExecutor{
 		}
 		if(cmd.getName().equalsIgnoreCase("addlore"))
 		{
-			if(args.length<1)return false;
 			if(!(cs instanceof Player) || !cs.hasPermission("itemedit.displayedit")){ cs.sendMessage("Error. Not enough permissions"); return true;}
 			Player p = (Player)cs;		
 			ItemStack item = p.getItemInHand();
@@ -71,6 +75,13 @@ public class EditItemDisplay implements CommandExecutor{
 			ItemStack item = p.getItemInHand();
 			if(item == null){p.sendMessage("Error! Empty hand."); return true;}
 			p.sendMessage(item.toString());
+			return true;
+		}
+		}
+		catch(Exception e)
+		{
+			cs.sendMessage("Error: "+e+" "+e.getMessage());
+			return true;
 		}
 		return false;
 	}

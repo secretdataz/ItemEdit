@@ -7,7 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ItemEditPlugin extends JavaPlugin{
 
 	EditItemCount eic;
+	EditItemDisplay eid;
 	public void onEnable(){
 		eic = new EditItemCount(this);
+		eid = new EditItemDisplay(this);
 	}
 }
